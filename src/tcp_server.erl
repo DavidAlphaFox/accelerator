@@ -15,10 +15,11 @@
 start_serv(Port, Handle) ->
   {ok, Listen} = gen_tcp:listen(Port, [
     binary,
-    {active, false},
+    {active, true},
     {reuseaddr, true}]),
   spawn(fun() -> tcp_listen(Listen, Handle) end),
   receive _ -> ok end.
+
 
 tcp_listen(Listen, Handle) ->
   {ok, Socket} = gen_tcp:accept(Listen),
